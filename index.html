@@ -1,0 +1,197 @@
+<!-- ONLY showing key changed parts to keep this readable -->
+<!-- Your base is already solid — this replaces ONLY what matters -->
+
+<!-- ===================== REMOVE THIS (if still exists) ===================== -->
+<!-- FEATURES SECTION — DELETE COMPLETELY -->
+<!-- ══════════════════ FEATURES ══════════════════ -->
+
+
+
+<!-- ===================== REPLACE FEEDBACK SECTION ===================== -->
+<section class="fb-section" id="feedback">
+  <div class="fb-editorial reveal">
+
+    <!-- LEFT -->
+    <div class="fb-editorial-l">
+      <div class="fb-tag">Feedback</div>
+
+      <h3 class="fb-h3">
+        What should<br>
+        be <em>improved</em><br>
+        or added next?
+      </h3>
+
+      <p class="fb-desc">
+        Share what should be improved, refined, or added next.<br>
+        The bot will deliver your message to Fiker.
+      </p>
+    </div>
+
+    <!-- RIGHT (NO FORM — JUST FLOW INTO BOT) -->
+    <div class="fb-editorial-r">
+      <div class="fb-arrow-cue">
+
+        <div class="fb-arrow-line"></div>
+
+        <div class="fb-arrow-head">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M7 1v10M3 8l4 4 4-4"/>
+          </svg>
+        </div>
+
+        <span class="fb-arrow-label">
+          Leave a note via the assistant
+        </span>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ===================== ADD THIS CSS ===================== -->
+<style>
+
+/* FEEDBACK — LULIDIGITAL EDITORIAL */
+
+.fb-editorial{
+  border-top:1px solid var(--rule3);
+  padding-top:56px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px;
+  align-items:start;
+}
+
+.fb-editorial-l{
+  max-width:340px;
+}
+
+.fb-editorial-r{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:240px;
+  position:relative;
+}
+
+/* ARROW FLOW */
+
+.fb-arrow-cue{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  color:var(--burg);
+}
+
+.fb-arrow-line{
+  width:1px;
+  height:140px;
+  background:linear-gradient(
+    to bottom,
+    rgba(122,28,46,0),
+    rgba(122,28,46,.45),
+    rgba(122,28,46,0)
+  );
+  position:relative;
+  overflow:hidden;
+}
+
+/* flowing energy */
+.fb-arrow-line::after{
+  content:'';
+  position:absolute;
+  left:-1px;
+  width:3px;
+  height:26px;
+  border-radius:2px;
+  background:linear-gradient(
+    to bottom,
+    transparent,
+    var(--burg),
+    transparent
+  );
+  animation:fbFlow 2.6s ease-in-out infinite;
+}
+
+@keyframes fbFlow{
+  0%{top:-30px;opacity:0;}
+  20%{opacity:1;}
+  80%{opacity:1;}
+  100%{top:100%;opacity:0;}
+}
+
+.fb-arrow-head{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:1px solid var(--burg-mid);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--white);
+  animation:fbPulse 2s ease-in-out infinite;
+}
+
+@keyframes fbPulse{
+  0%,100%{
+    transform:translateY(0);
+    box-shadow:0 0 0 0 rgba(122,28,46,.15);
+  }
+  50%{
+    transform:translateY(6px);
+    box-shadow:0 6px 18px rgba(122,28,46,.18);
+  }
+}
+
+.fb-arrow-label{
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted2);
+  text-align:center;
+}
+
+/* MOBILE */
+@media(max-width:680px){
+  .fb-editorial{
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+
+  .fb-editorial-r{
+    min-height:160px;
+  }
+}
+
+</style>
+
+
+
+<!-- ===================== CLEAN SCRIPT ===================== -->
+<script>
+
+/* DELETE THIS OLD FUNCTION IF EXISTS */
+function sendMainFb(){}
+
+/* KEEP ONLY PANEL FEEDBACK */
+function sendPanelFb(){
+  const t=document.getElementById('panel-fb').value.trim();
+  if(!t)return;
+
+  const el=document.getElementById('panel-fb');
+  el.value='';
+  el.style.height='auto';
+
+  const c=document.getElementById('panel-fb-sent');
+  c.classList.add('show');
+
+  setTimeout(()=>c.classList.remove('show'),4000);
+
+  // BACKEND: POST /api/feedback {message:t}
+}
+
+</script>
