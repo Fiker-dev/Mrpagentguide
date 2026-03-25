@@ -323,7 +323,6 @@
     }
 
     .section-alt { background: var(--white); }
-
     .inner { padding: 80px clamp(24px, 5vw, 72px); }
 
     .eyebrow-row {
@@ -990,13 +989,6 @@
       letter-spacing: .01em;
     }
 
-    .ws-panel-sub {
-      font-size: 10px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted2);
-    }
-
     .ws-close-btn {
       background: none;
       border: none;
@@ -1525,7 +1517,6 @@
     <div class="ws-head">
       <div class="ws-head-l">
         <div class="ws-panel-name">Talk to Lily</div>
-        <div class="ws-panel-sub">Share what feels unclear, missing, or worth improving</div>
       </div>
       <button class="ws-close-btn" onclick="toggleWs()">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2l10 10M12 2L2 12"/></svg>
@@ -1535,7 +1526,7 @@
     <div class="ws-body">
       <div class="ws-msgs" id="ws-msgs">
         <div class="wm bot">
-          <div class="wm-b">Good day — I’m Lily, Fiker’s Assistant. Tell me what feels off, unclear, missing, or something you wish the agents could do, and I’ll help you send it to Fiker.</div>
+          <div class="wm-b">Hello — I’m Lily, Fiker’s Assistant. Tell me what’s not working, what’s missing, or what you wish the agents could do, and I’ll pass it to Fiker.</div>
           <div class="wm-t">Now</div>
         </div>
       </div>
@@ -1585,8 +1576,6 @@
     const sendBtn = document.getElementById('ws-send-btn');
     const sentNote = document.getElementById('panel-fb-sent');
 
-    const replyHistory = [];
-
     function toggleWs(force) {
       wsOpen = typeof force === 'boolean' ? force : !wsOpen;
       if (ws) ws.classList.toggle('open', wsOpen);
@@ -1609,6 +1598,35 @@
         .replace(/>/g, '&gt;');
     }
 
+    function getTimeGreeting() {
+      const hour = new Date().getHours();
+      if (hour < 12) return 'Good morning';
+      if (hour < 18) return 'Good afternoon';
+      return 'Good evening';
+    }
+
+    function getTodayKey() {
+      const d = new Date();
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function maybeAddDailyGreeting() {
+      const key = 'lily-last-greeting-date';
+      const today = getTodayKey();
+      const last = localStorage.getItem(key);
+      const greeting = getTimeGreeting();
+
+      if (last === today) {
+        addMsg(`${greeting} again, Mr P. Any more feedback today?`, 'bot');
+      } else {
+        addMsg(`${greeting}, Mr P. Any feedback today?`, 'bot');
+        localStorage.setItem(key, today);
+      }
+    }
+
     function normalizeForCompare(text) {
       return String(text || '')
         .toLowerCase()
@@ -1621,48 +1639,65 @@
     function stripRepeatedLilyIntro(text) {
       if (!text) return text;
 
+      let cleaned = text.trim();
+
       const patterns = [
-        /^good\s+(morning|afternoon|evening|day)\s+[—-]\s*i['’]m lily(?:,\s*fiker['’]s assistant)?\.\s*/i,
+        /^hello\s*[—-]\s*i['’]m lily(?:,\s*fiker['’]s assistant)?\.\s*/i,
+        /^good\s+(morning|afternoon|evening|day)\s*[—-]\s*i['’]m lily(?:,\s*fiker['’]s assistant)?\.\s*/i,
         /^i['’]m lily(?:,\s*fiker['’]s assistant)?\.\s*/i,
-        /^good\s+(morning|afternoon|evening|day)\.\s*/i
+        /^good\s+(morning|afternoon|evening|day)\.\s*/i,
+        /^good\s+(morning|afternoon|evening|day)\s*[—-]\s*/i
       ];
 
-      let cleaned = text.trim();
       patterns.forEach((pattern) => {
         cleaned = cleaned.replace(pattern, '');
       });
 
-      if (!cleaned) return text;
-      return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+      cleaned = cleaned.replace(/tell me what['’]s not working, what['’]s missing, or what you wish the agents could do, and i['’]ll pass it to fiker\.?/ig, '');
+      cleaned = cleaned.replace(/tell me what feels off, unclear, missing, or something you wish the agents could do, and i['’]ll help you send it to fiker\.?/ig, '');
+      cleaned = cleaned.replace(/any feedback today\??/ig, '');
+      cleaned = cleaned.replace(/any more feedback today\??/ig, '');
+      cleaned = cleaned.replace(/\s{2,}/g, ' ').trim();
+
+      return cleaned;
     }
 
-    function softenIfRepeated(text) {
-      const cleaned = stripRepeatedLilyIntro(text || '').trim();
+    function softenRepeatedReply(text) {
+      const cleaned = stripRepeatedLilyIntro(text);
+      if (!cleaned) return "I’m here, Mr P. Tell me what you’d like improved.";
+
+      const historyKey = 'lily-reply-history';
+      let history = [];
+      try {
+        history = JSON.parse(sessionStorage.getItem(historyKey) || '[]');
+      } catch {
+        history = [];
+      }
+
       const normalized = normalizeForCompare(cleaned);
 
-      if (!normalized) return text;
-
-      const alreadyUsed = replyHistory.includes(normalized);
-      if (!alreadyUsed) {
-        replyHistory.push(normalized);
-        if (replyHistory.length > 8) replyHistory.shift();
+      if (!history.includes(normalized)) {
+        history.push(normalized);
+        history = history.slice(-8);
+        sessionStorage.setItem(historyKey, JSON.stringify(history));
         return cleaned;
       }
 
-      const fallbackVariants = [
-        'I understand. Tell me a little more so I can pass it on clearly.',
-        'Got it. Help me pin it down a bit more so I capture it properly.',
-        'Understood. What part of it feels most frustrating or unclear?',
-        'Thanks — can you tell me a bit more about what is not working well?',
-        'I hear you. What would you want changed first?'
+      const alternatives = [
+        "I understand, Mr P. Tell me a little more so I can pass it on clearly.",
+        "Got it, Mr P. What part would you want changed first?",
+        "Understood, Mr P. What feels most frustrating or incomplete?",
+        "I hear you, Mr P. Can you tell me a bit more about that?",
+        "Alright, Mr P. What would better look like for you here?"
       ];
 
-      for (const variant of fallbackVariants) {
-        const normalizedVariant = normalizeForCompare(variant);
-        if (!replyHistory.includes(normalizedVariant)) {
-          replyHistory.push(normalizedVariant);
-          if (replyHistory.length > 8) replyHistory.shift();
-          return variant;
+      for (const alt of alternatives) {
+        const normAlt = normalizeForCompare(alt);
+        if (!history.includes(normAlt)) {
+          history.push(normAlt);
+          history = history.slice(-8);
+          sessionStorage.setItem(historyKey, JSON.stringify(history));
+          return alt;
         }
       }
 
@@ -1784,7 +1819,7 @@
         removeTyping();
 
         if (data?.reply) {
-          const cleanedReply = softenIfRepeated(data.reply);
+          const cleanedReply = softenRepeatedReply(data.reply);
           addMsg(cleanedReply, 'bot');
         } else {
           addMsg('Something went wrong on my side. Please try again in a moment.', 'bot');
@@ -1818,6 +1853,8 @@
         wsSend();
       }
     }
+
+    maybeAddDailyGreeting();
   </script>
 </body>
 </html>
