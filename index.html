@@ -323,6 +323,7 @@
     }
 
     .section-alt { background: var(--white); }
+
     .inner { padding: 80px clamp(24px, 5vw, 72px); }
 
     .eyebrow-row {
@@ -1526,7 +1527,7 @@
     <div class="ws-body">
       <div class="ws-msgs" id="ws-msgs">
         <div class="wm bot">
-          <div class="wm-b">Hello — I’m Lily, Fiker’s Assistant. Tell me what’s not working, what’s missing, or what you wish the agents could do, and I’ll pass it to Fiker.</div>
+          <div class="wm-b">Hello — I’m Lily, Fiker’s Assistant. Tell me what’s not working, missing, or what you wish the agents could do, and I’ll pass it to Fiker.</div>
           <div class="wm-t">Now</div>
         </div>
       </div>
@@ -1568,6 +1569,7 @@
 
     let wsOpen = false;
     let isSending = false;
+    let hasShownSessionGreeting = false;
 
     const ws = document.getElementById('ws');
     const launcher = document.getElementById('launcher');
@@ -1580,6 +1582,11 @@
       wsOpen = typeof force === 'boolean' ? force : !wsOpen;
       if (ws) ws.classList.toggle('open', wsOpen);
       if (launcher) launcher.classList.toggle('open', wsOpen);
+
+      if (wsOpen && !hasShownSessionGreeting) {
+        hasShownSessionGreeting = true;
+        maybeShowDailyGreeting();
+      }
     }
 
     document.addEventListener('keydown', (e) => {
@@ -1598,44 +1605,6 @@
         .replace(/>/g, '&gt;');
     }
 
-    function getTimeGreeting() {
-      const hour = new Date().getHours();
-      if (hour < 12) return 'Good morning';
-      if (hour < 18) return 'Good afternoon';
-      return 'Good evening';
-    }
-
-    function getTodayKey() {
-      const d = new Date();
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
-    }
-
-    function maybeAddDailyGreeting() {
-      const key = 'lily-last-greeting-date';
-      const today = getTodayKey();
-      const last = localStorage.getItem(key);
-      const greeting = getTimeGreeting();
-
-      if (last === today) {
-        addMsg(`${greeting} again, Mr P. Any more feedback today?`, 'bot');
-      } else {
-        addMsg(`${greeting}, Mr P. Any feedback today?`, 'bot');
-        localStorage.setItem(key, today);
-      }
-    }
-
-    function normalizeForCompare(text) {
-      return String(text || '')
-        .toLowerCase()
-        .replace(/\s+/g, ' ')
-        .replace(/[—–-]/g, ' ')
-        .replace(/[^\w\s]/g, '')
-        .trim();
-    }
-
     function stripRepeatedLilyIntro(text) {
       if (!text) return text;
 
@@ -1645,7 +1614,6 @@
         /^hello\s*[—-]\s*i['’]m lily(?:,\s*fiker['’]s assistant)?\.\s*/i,
         /^good\s+(morning|afternoon|evening|day)\s*[—-]\s*i['’]m lily(?:,\s*fiker['’]s assistant)?\.\s*/i,
         /^i['’]m lily(?:,\s*fiker['’]s assistant)?\.\s*/i,
-        /^good\s+(morning|afternoon|evening|day)\.\s*/i,
         /^good\s+(morning|afternoon|evening|day)\s*[—-]\s*/i
       ];
 
@@ -1653,52 +1621,30 @@
         cleaned = cleaned.replace(pattern, '');
       });
 
-      cleaned = cleaned.replace(/tell me what['’]s not working, what['’]s missing, or what you wish the agents could do, and i['’]ll pass it to fiker\.?/ig, '');
-      cleaned = cleaned.replace(/tell me what feels off, unclear, missing, or something you wish the agents could do, and i['’]ll help you send it to fiker\.?/ig, '');
-      cleaned = cleaned.replace(/any feedback today\??/ig, '');
-      cleaned = cleaned.replace(/any more feedback today\??/ig, '');
-      cleaned = cleaned.replace(/\s{2,}/g, ' ').trim();
-
-      return cleaned;
+      return cleaned ? cleaned.charAt(0).toUpperCase() + cleaned.slice(1) : text;
     }
 
-    function softenRepeatedReply(text) {
-      const cleaned = stripRepeatedLilyIntro(text);
-      if (!cleaned) return "I’m here, Mr P. Tell me what you’d like improved.";
+    function normalizeBotReply(text) {
+      if (!text) return text;
 
-      const historyKey = 'lily-reply-history';
-      let history = [];
-      try {
-        history = JSON.parse(sessionStorage.getItem(historyKey) || '[]');
-      } catch {
-        history = [];
-      }
+      let cleaned = stripRepeatedLilyIntro(text);
 
-      const normalized = normalizeForCompare(cleaned);
-
-      if (!history.includes(normalized)) {
-        history.push(normalized);
-        history = history.slice(-8);
-        sessionStorage.setItem(historyKey, JSON.stringify(history));
-        return cleaned;
-      }
-
-      const alternatives = [
-        "I understand, Mr P. Tell me a little more so I can pass it on clearly.",
-        "Got it, Mr P. What part would you want changed first?",
-        "Understood, Mr P. What feels most frustrating or incomplete?",
-        "I hear you, Mr P. Can you tell me a bit more about that?",
-        "Alright, Mr P. What would better look like for you here?"
+      const repeatedPhrases = [
+        /tell me what feels off, unclear, missing, or something you wish the agents could do[, ]*and i[’']ll help you send it to fiker\.?/ig,
+        /tell me what feels off, unclear, missing, or worth improving[, ]*and i[’']ll help you send it to fiker\.?/ig,
+        /tell me what['’]s not working, missing, or what you wish the agents could do[, ]*and i[’']ll pass it to fiker\.?/ig,
+        /i['’]ll help you send it to fiker\.?/ig,
+        /i['’]ll pass it to fiker\.?/ig
       ];
 
-      for (const alt of alternatives) {
-        const normAlt = normalizeForCompare(alt);
-        if (!history.includes(normAlt)) {
-          history.push(normAlt);
-          history = history.slice(-8);
-          sessionStorage.setItem(historyKey, JSON.stringify(history));
-          return alt;
-        }
+      repeatedPhrases.forEach((pattern) => {
+        cleaned = cleaned.replace(pattern, '');
+      });
+
+      cleaned = cleaned.replace(/\s{2,}/g, ' ').trim();
+
+      if (!cleaned) {
+        return "I’m here, Mr P.";
       }
 
       return cleaned;
@@ -1763,6 +1709,31 @@
       }, 4000);
     }
 
+    function getTimeGreetingWord() {
+      const hour = new Date().getHours();
+      if (hour < 12) return 'Good morning';
+      if (hour < 18) return 'Good afternoon';
+      return 'Good evening';
+    }
+
+    function maybeShowDailyGreeting() {
+      const todayKey = new Date().toISOString().slice(0, 10);
+      const storageKey = 'lily-last-greeting-date';
+      const lastGreetingDate = localStorage.getItem(storageKey);
+
+      let greetingText = '';
+      if (lastGreetingDate === todayKey) {
+        greetingText = `${getTimeGreetingWord()} again, Mr P. Any more feedback today?`;
+      } else {
+        greetingText = `${getTimeGreetingWord()}, Mr P. Any feedback today?`;
+        localStorage.setItem(storageKey, todayKey);
+      }
+
+      setTimeout(() => {
+        addMsg(greetingText, 'bot');
+      }, 450);
+    }
+
     async function postChat(message) {
       const response = await fetch(`${API_BASE}/api/chat`, {
         method: 'POST',
@@ -1819,7 +1790,7 @@
         removeTyping();
 
         if (data?.reply) {
-          const cleanedReply = softenRepeatedReply(data.reply);
+          const cleanedReply = normalizeBotReply(data.reply);
           addMsg(cleanedReply, 'bot');
         } else {
           addMsg('Something went wrong on my side. Please try again in a moment.', 'bot');
@@ -1853,8 +1824,6 @@
         wsSend();
       }
     }
-
-    maybeAddDailyGreeting();
   </script>
 </body>
 </html>
