@@ -36,14 +36,13 @@ body{
   cursor:none;
   -webkit-font-smoothing:antialiased;
 }
-/* grain */
 body::before{
   content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.02;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:180px;
 }
 
-/* ── CURSOR ── */
+/* cursor */
 #cur{
   position:fixed;z-index:99999;
   width:8px;height:8px;
@@ -56,7 +55,7 @@ body::before{
 #cur.lg{width:34px;height:34px;background:transparent;border:1px solid var(--burg);opacity:.55;}
 @media(max-width:768px){body{cursor:auto;}#cur{display:none;}}
 
-/* ── NAV ── */
+/* nav */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   height:58px;padding:0 clamp(24px,5vw,72px);
@@ -78,7 +77,7 @@ nav{
 .nav-links a:hover{color:var(--ink);}
 @media(max-width:680px){.nav-links{display:none;}}
 
-/* ── MASTHEAD ── */
+/* masthead */
 .masthead{
   padding-top:82px;
   border-bottom:1px solid var(--rule3);
@@ -134,14 +133,12 @@ nav{
 }
 .mast-desc strong{font-style:normal;font-weight:600;color:var(--burg);}
 
-/* contents list */
 .contents{border-top:1px solid var(--rule2);border-bottom:1px solid var(--rule2);}
 .contents-row{
   display:flex;align-items:center;justify-content:space-between;
   padding:11px 0;border-bottom:1px solid var(--rule);
   font-size:13px;font-weight:400;color:var(--muted);
   cursor:pointer;transition:color .2s;text-decoration:none;
-  display:flex;
 }
 .contents-row:last-child{border-bottom:none;}
 .contents-row:hover{color:var(--ink);}
@@ -156,7 +153,7 @@ nav{
   .mast-r{padding-left:0;}
 }
 
-/* ── TICKER ── */
+/* ticker */
 .ticker{
   height:38px;overflow:hidden;
   border-bottom:1px solid var(--rule2);
@@ -176,7 +173,7 @@ nav{
 .tick-item.accent{color:var(--burg);font-weight:500;}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ── SHARED SECTION ── */
+/* shared section */
 .section{position:relative;z-index:2;background:var(--paper);}
 .section-alt{background:var(--white);}
 .inner{padding:80px clamp(24px,5vw,72px);}
@@ -192,27 +189,12 @@ nav{
 }
 .eyebrow-rule{flex:0 0 28px;height:1px;background:var(--burg);opacity:.5;}
 
-.sec-h2{
-  font-family:var(--font-d);
-  font-size:clamp(28px,3.8vw,46px);
-  font-weight:300;line-height:1.1;letter-spacing:-.01em;
-  color:var(--ink);margin-bottom:10px;
-}
-.sec-h2 em{font-style:italic;color:var(--burg);}
-.sec-sub{
-  font-size:15px;font-weight:300;color:var(--muted);
-  max-width:480px;line-height:1.75;margin-bottom:52px;
-}
-
-/* ── AGENT CARDS ── */
 .agent-block{
   border:1px solid var(--rule2);
   background:var(--white);
   position:relative;overflow:hidden;
 }
 .agent-block + .agent-block{margin-top:1px;}
-
-/* left accent by agent */
 .agent-block.chanelle{border-left:3px solid var(--burg);}
 .agent-block.sofie{border-left:3px solid rgba(122,28,46,.45);}
 .agent-block.mimi{border-left:3px solid rgba(122,28,46,.22);}
@@ -253,7 +235,6 @@ nav{
 }
 @keyframes live{0%,100%{opacity:.5;}50%{opacity:1;}}
 
-/* first-person intro */
 .agent-voice{
   margin-top:24px;
   padding-top:20px;
@@ -272,7 +253,6 @@ nav{
 }
 .av-text strong{font-style:normal;font-weight:600;color:var(--ink);}
 
-/* right side */
 .ag-r-label{
   font-size:9px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--muted2);margin-bottom:14px;
@@ -307,7 +287,7 @@ nav{
   .ag-r{padding:0 38px 38px;}
 }
 
-/* ── PIPELINE CONNECTORS ── */
+/* pipeline connectors */
 .pipeline-conn{
   display:flex;align-items:center;
   padding:0 clamp(24px,5vw,72px);
@@ -326,7 +306,6 @@ nav{
   background:linear-gradient(to bottom,var(--burg),rgba(122,28,46,.15));
   position:relative;overflow:hidden;
 }
-/* flowing dot on the line */
 .pipeline-line::after{
   content:'';
   position:absolute;
@@ -356,7 +335,7 @@ nav{
   color:var(--muted2);font-style:italic;
 }
 
-/* ── COLLABORATION SECTION ── */
+/* collaboration */
 .collab-section{
   background:var(--paper2);
   border-top:1px solid var(--rule2);
@@ -389,7 +368,6 @@ nav{
   max-width:480px;line-height:1.75;margin-bottom:56px;
 }
 
-/* pipeline SVG */
 .pipe-container{width:100%;}
 .pipe-svg-wrap{
   width:100%;
@@ -429,7 +407,7 @@ nav{
   .pipe-svg{min-width:600px;}
 }
 
-/* ── FEEDBACK ── */
+/* feedback */
 .fb-section{padding:24px clamp(24px,5vw,72px) 80px;position:relative;z-index:2;}
 .fb-wrap{display:none;}
 .fb-main{
@@ -448,7 +426,7 @@ nav{
   display:flex;
   align-items:center;
   justify-content:flex-end;
-  padding-right:68px;/* leaves room for fixed bot icon */
+  padding-right:68px;
   padding-bottom:4px;
 }
 .fb-editorial-spacer{display:none;}
@@ -469,59 +447,60 @@ nav{
   font-size:14px;font-weight:300;color:var(--muted);line-height:1.8;
   max-width:260px;
 }
-.fb-delivery{
-  margin-top:18px;font-size:12px;color:var(--muted2);
-  display:flex;align-items:flex-start;gap:6px;font-style:italic;line-height:1.55;
+.fb-h-arrow{
+  width:min(340px,52vw);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--burg);
+  opacity:.72;
 }
-.fb-delivery-dot{
-  width:4px;height:4px;border-radius:50%;background:var(--burg);
-  flex-shrink:0;margin-top:5px;opacity:.6;
+.fb-h-line{
+  flex:1;
+  height:1px;
+  background:linear-gradient(to right,rgba(122,28,46,.1),rgba(122,28,46,.55));
+  position:relative;
+}
+.fb-h-dots{
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+.fb-h-dots span{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--burg);
+  opacity:.28;
+  animation:fbDots 1.8s ease-in-out infinite;
+}
+.fb-h-dots span:nth-child(2){animation-delay:.2s;}
+.fb-h-dots span:nth-child(3){animation-delay:.4s;}
+.fb-h-head{
+  flex-shrink:0;
+  color:var(--burg);
+  animation:fbArrowNudge 1.8s ease-in-out infinite;
+}
+@keyframes fbDots{
+  0%,100%{opacity:.18;transform:translateX(0);}
+  50%{opacity:.85;transform:translateX(6px);}
+}
+@keyframes fbArrowNudge{
+  0%,100%{transform:translateX(0);}
+  50%{transform:translateX(5px);}
 }
 
-.fb-input-area{
-  border-bottom:1px solid var(--rule3);
-  padding-bottom:18px;
+@media(max-width:740px){
+  .fb-main{flex-direction:column;align-items:flex-start;gap:30px;}
+  .fb-arrow-right{width:100%;justify-content:flex-start;padding-right:0;}
+  .fb-h-arrow{width:100%;max-width:220px;}
 }
-.fb-textarea{
-  width:100%;background:transparent;border:none;
-  padding:0 0 6px;
-  font-family:var(--font-d);font-size:clamp(18px,2.5vw,24px);
-  font-weight:300;font-style:italic;color:var(--ink);
-  resize:none;outline:none;min-height:80px;max-height:200px;line-height:1.6;
-  transition:none;display:block;
-}
-.fb-textarea::placeholder{color:var(--muted2);}
-.fb-send-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding-top:12px;flex-wrap:wrap;gap:8px;
-}
-.fb-note-hint{
-  font-size:11px;color:var(--muted2);font-style:italic;
-  display:flex;align-items:center;gap:6px;
-}
-.fb-note-hint svg{opacity:.45;flex-shrink:0;}
-.fb-send-btn{
-  background:none;border:none;cursor:pointer;
-  font-family:var(--font-b);font-size:11px;font-weight:500;
-  letter-spacing:.1em;text-transform:uppercase;
-  color:var(--ink);display:flex;align-items:center;gap:6px;
-  padding:0;transition:color .2s;
-}
-.fb-send-btn:hover{color:var(--burg);}
-.fb-send-btn:hover svg{transform:translateX(3px);}
-.fb-send-btn svg{transition:transform .2s;}
+
 .fb-sent{
   font-size:12px;font-style:italic;color:var(--burg);
   margin-top:8px;display:none;
 }
 .fb-sent.show{display:block;}
 
-@media(max-width:680px){
-  .fb-wrap{grid-template-columns:1fr;gap:28px;}
-  .fb-desc{max-width:100%;}
-}
-
-/* ── FOOTER ── */
+/* footer */
 footer{
   padding:36px clamp(24px,5vw,72px);
   border-top:1px solid var(--rule3);
@@ -535,7 +514,7 @@ footer{
 .foot-brand-dot{width:5px;height:5px;border-radius:50%;background:var(--burg);}
 .foot-note{font-size:11px;color:var(--muted2);letter-spacing:.05em;}
 
-/* ── FLOATING LAUNCHER ── */
+/* launcher */
 #launcher{
   position:fixed;bottom:28px;right:28px;z-index:9999;
   width:50px;height:50px;border-radius:50%;
@@ -547,7 +526,6 @@ footer{
 }
 #launcher:hover{transform:scale(1.07);box-shadow:0 8px 28px rgba(17,16,9,.28);}
 #launcher.open{transform:rotate(45deg);}
-/* ring pulse */
 #launcher::before{
   content:'';position:absolute;inset:-2px;border-radius:50%;
   border:1px solid rgba(122,28,46,.3);
@@ -563,7 +541,7 @@ footer{
   50%{transform:scale(1.22);opacity:0;}
 }
 
-/* ── WORKSPACE PANEL ── */
+/* workspace panel */
 #ws{
   position:fixed;bottom:90px;right:28px;z-index:9998;
   width:335px;
@@ -605,12 +583,11 @@ footer{
 .ws-pane{display:none;padding:16px;}
 .ws-pane.on{display:block;}
 
-/* messages */
 .ws-msgs{display:flex;flex-direction:column;gap:9px;margin-bottom:8px;}
 .wm{max-width:90%;}
 .wm.bot{align-self:flex-start;}
 .wm.user{align-self:flex-end;}
-.wm-b{padding:9px 13px;font-size:13px;font-weight:300;line-height:1.55;}
+.wm-b{padding:9px 13px;font-size:13px;font-weight:300;line-height:1.55;word-break:break-word;}
 .wm.bot .wm-b{background:var(--paper);border:1px solid var(--rule2);color:var(--ink);}
 .wm.user .wm-b{background:var(--ink);color:var(--paper);}
 .wm-t{font-size:10px;color:var(--muted2);margin-top:3px;letter-spacing:.04em;}
@@ -624,7 +601,6 @@ footer{
 }
 .chip:hover{background:var(--burg-dim);border-color:var(--burg-mid);color:var(--burg2);}
 
-/* typing */
 .typing{display:inline-flex;gap:3px;padding:10px 13px;}
 .typing span{width:4px;height:4px;border-radius:50%;background:var(--burg);opacity:.4;animation:td 1.2s ease-in-out infinite;}
 .typing span:nth-child(2){animation-delay:.2s;}
@@ -647,11 +623,11 @@ footer{
 .ws-send{
   width:34px;height:34px;background:var(--ink);color:var(--paper);
   border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;transition:background .2s;
+  flex-shrink:0;transition:background .2s,opacity .2s;
 }
 .ws-send:hover{background:var(--burg);}
+.ws-send:disabled,.fbp-send:disabled{opacity:.45;cursor:not-allowed;}
 
-/* feedback pane in panel */
 .fbp-intro{font-size:13px;font-weight:300;font-style:italic;color:var(--muted);line-height:1.7;margin-bottom:14px;}
 .fbp-ta{
   width:100%;background:transparent;border:none;border-bottom:1px solid var(--rule2);
@@ -671,16 +647,14 @@ footer{
   background:none;border:none;cursor:pointer;
   font-family:var(--font-b);font-size:11px;font-weight:500;
   letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
-  display:flex;align-items:center;gap:5px;padding:0;transition:color .2s;
+  display:flex;align-items:center;gap:5px;padding:0;transition:color .2s,opacity .2s;
 }
 .fbp-send:hover{color:var(--burg);}
 .fbp-sent{font-size:11px;font-style:italic;color:var(--burg);display:none;}
 .fbp-sent.show{display:block;}
 
-/* ask footer */
 #ask-footer{flex-shrink:0;}
 
-/* ── REVEALS ── */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease;}
 .reveal.vis{opacity:1;transform:translateY(0);}
 .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
@@ -698,7 +672,6 @@ footer{
 <body>
 <div id="cur"></div>
 
-<!-- ══ NAV ══ -->
 <nav>
   <div class="nav-brand"><div class="nav-brand-dot"></div>Mr P</div>
   <div class="nav-links">
@@ -710,7 +683,6 @@ footer{
   </div>
 </nav>
 
-<!-- ══ MASTHEAD ══ -->
 <div class="masthead">
   <div class="mast-inner">
     <div class="mast-eyebrow au1">Agent Assistant Guide &nbsp;·&nbsp; Private Legal Intelligence</div>
@@ -750,7 +722,6 @@ footer{
   </div>
 </div>
 
-<!-- ══ TICKER ══ -->
 <div class="ticker">
   <div class="tick-inner">
     <span class="tick-item accent">Chanelle</span>
@@ -786,7 +757,6 @@ footer{
   </div>
 </div>
 
-<!-- ══════════════════ CHANELLE ══════════════════ -->
 <section class="section inner" id="chanelle">
   <div class="eyebrow-row reveal"><span class="eyebrow">§ 01</span><div class="eyebrow-rule"></div></div>
   <div class="agent-block chanelle reveal d1">
@@ -824,7 +794,6 @@ footer{
   </div>
 </section>
 
-<!-- connector -->
 <div class="pipeline-conn">
   <div class="pipeline-left">
     <div class="pipeline-line"></div>
@@ -833,7 +802,6 @@ footer{
   <span class="pipeline-label">Privacy-safe research delegation &rarr; Sofie</span>
 </div>
 
-<!-- ══════════════════ SOFIE ══════════════════ -->
 <section class="section section-alt inner" id="sofie" style="padding-top:0;padding-bottom:80px;">
   <div class="eyebrow-row reveal"><span class="eyebrow">§ 02</span><div class="eyebrow-rule"></div></div>
   <div class="agent-block sofie reveal d1">
@@ -871,7 +839,6 @@ footer{
   </div>
 </section>
 
-<!-- connector -->
 <div class="pipeline-conn">
   <div class="pipeline-left">
     <div class="pipeline-line"></div>
@@ -880,7 +847,6 @@ footer{
   <span class="pipeline-label">Research output passed to Mimi for validation</span>
 </div>
 
-<!-- ══════════════════ MIMI ══════════════════ -->
 <section class="section inner" id="mimi" style="padding-top:0;padding-bottom:80px;">
   <div class="eyebrow-row reveal"><span class="eyebrow">§ 03</span><div class="eyebrow-rule"></div></div>
   <div class="agent-block mimi reveal d1">
@@ -916,21 +882,16 @@ footer{
   </div>
 </section>
 
-<!-- ══════════════════ COLLABORATION ══════════════════ -->
 <section class="collab-section" id="collaboration">
   <div class="collab-inner">
     <div class="collab-eyebrow reveal">§ 04</div>
     <h2 class="collab-h2 reveal">3 Agent <em>Collaboration</em></h2>
     <p class="collab-sub reveal d1">One question. Three stages. Everything confidential.</p>
 
-    <!-- SVG PIPELINE -->
     <div class="pipe-container reveal d2">
-
-      <!-- Pipe SVG - horizontal flow with loop back -->
       <div class="pipe-svg-wrap">
         <svg class="pipe-svg" viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <!-- animated gradient for the flowing current -->
             <linearGradient id="flow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="rgba(122,28,46,0)"/>
               <stop offset="40%" stop-color="rgba(122,28,46,0.9)"/>
@@ -943,12 +904,10 @@ footer{
               <stop offset="60%" stop-color="rgba(180,60,80,0.8)"/>
               <stop offset="100%" stop-color="rgba(122,28,46,0)"/>
             </linearGradient>
-            <!-- glow filter -->
             <filter id="glow" x="-20%" y="-100%" width="140%" height="300%">
               <feGaussianBlur stdDeviation="2.5" result="blur"/>
               <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
-            <!-- clip for animated elements -->
             <clipPath id="pipe-clip">
               <rect x="60" y="70" width="780" height="8"/>
             </clipPath>
@@ -957,66 +916,52 @@ footer{
             </clipPath>
           </defs>
 
-          <!-- NODE LABELS: Stage numbers -->
-          <text x="112" y="30" text-anchor="middle" font-family="DM Sans" font-size="8" letter-spacing="2" fill="rgba(122,28,46,0.7)" text-transform="uppercase">STAGE 01</text>
+          <text x="112" y="30" text-anchor="middle" font-family="DM Sans" font-size="8" letter-spacing="2" fill="rgba(122,28,46,0.7)">STAGE 01</text>
           <text x="370" y="30" text-anchor="middle" font-family="DM Sans" font-size="8" letter-spacing="2" fill="rgba(122,28,46,0.7)">STAGE 02</text>
           <text x="628" y="30" text-anchor="middle" font-family="DM Sans" font-size="8" letter-spacing="2" fill="rgba(122,28,46,0.7)">STAGE 03</text>
           <text x="840" y="30" text-anchor="middle" font-family="DM Sans" font-size="8" letter-spacing="2" fill="rgba(122,28,46,0.7)">STAGE 04</text>
 
-          <!-- NODE NAMES -->
           <text x="112" y="56" text-anchor="middle" font-family="Cormorant Garamond" font-size="22" font-style="italic" font-weight="300" fill="rgb(17,16,9)">Chanelle</text>
           <text x="370" y="56" text-anchor="middle" font-family="Cormorant Garamond" font-size="22" font-style="italic" font-weight="300" fill="rgb(17,16,9)">Sofie</text>
           <text x="628" y="56" text-anchor="middle" font-family="Cormorant Garamond" font-size="22" font-style="italic" font-weight="300" fill="rgb(17,16,9)">Mimi</text>
           <text x="840" y="56" text-anchor="middle" font-family="Cormorant Garamond" font-size="22" font-style="italic" font-weight="300" fill="rgb(17,16,9)">Chanelle</text>
 
-          <!-- MAIN PIPE TRACK (forward) -->
           <line x1="60" y1="74" x2="885" y2="74" stroke="rgba(122,28,46,0.12)" stroke-width="6" stroke-linecap="round"/>
-
-          <!-- RETURN PIPE TRACK (backward) -->
           <line x1="60" y1="154" x2="885" y2="154" stroke="rgba(122,28,46,0.06)" stroke-width="4" stroke-linecap="round"/>
 
-          <!-- NODE CIRCLES (forward pipe) -->
-          <circle cx="112" cy="74" r="10" fill="var(--paper2,#ece6da)" stroke="rgba(122,28,46,0.5)" stroke-width="1.5"/>
-          <circle cx="370" cy="74" r="10" fill="var(--paper2,#ece6da)" stroke="rgba(122,28,46,0.4)" stroke-width="1.5"/>
-          <circle cx="628" cy="74" r="10" fill="var(--paper2,#ece6da)" stroke="rgba(122,28,46,0.3)" stroke-width="1.5"/>
-          <circle cx="840" cy="74" r="10" fill="var(--paper2,#ece6da)" stroke="rgba(122,28,46,0.5)" stroke-width="1.5"/>
+          <circle cx="112" cy="74" r="10" fill="#ece6da" stroke="rgba(122,28,46,0.5)" stroke-width="1.5"/>
+          <circle cx="370" cy="74" r="10" fill="#ece6da" stroke="rgba(122,28,46,0.4)" stroke-width="1.5"/>
+          <circle cx="628" cy="74" r="10" fill="#ece6da" stroke="rgba(122,28,46,0.3)" stroke-width="1.5"/>
+          <circle cx="840" cy="74" r="10" fill="#ece6da" stroke="rgba(122,28,46,0.5)" stroke-width="1.5"/>
 
-          <!-- NODE INNER DOTS -->
           <circle cx="112" cy="74" r="4" fill="rgba(122,28,46,0.7)"/>
           <circle cx="370" cy="74" r="4" fill="rgba(122,28,46,0.55)"/>
           <circle cx="628" cy="74" r="4" fill="rgba(122,28,46,0.4)"/>
           <circle cx="840" cy="74" r="4" fill="rgba(122,28,46,0.7)"/>
 
-          <!-- DOWN CONNECTORS (to return pipe) -->
           <line x1="840" y1="84" x2="840" y2="154" stroke="rgba(122,28,46,0.18)" stroke-width="3"/>
           <line x1="112" y1="84" x2="112" y2="154" stroke="rgba(122,28,46,0.12)" stroke-width="2" stroke-dasharray="3 3"/>
 
-          <!-- RETURN NODE dots -->
           <circle cx="840" cy="154" r="6" fill="rgba(122,28,46,0.3)" stroke="rgba(122,28,46,0.2)" stroke-width="1"/>
           <circle cx="112" cy="154" r="6" fill="rgba(122,28,46,0.15)" stroke="rgba(122,28,46,0.15)" stroke-width="1"/>
 
-          <!-- ANIMATED FLOW PARTICLE (forward) -->
           <rect x="0" y="70" width="60" height="8" rx="4" fill="url(#flow-grad)" filter="url(#glow)" clip-path="url(#pipe-clip)">
             <animateTransform attributeName="transform" type="translate" from="-60 0" to="880 0" dur="3.2s" repeatCount="indefinite" calcMode="linear"/>
           </rect>
 
-          <!-- ANIMATED RETURN PARTICLE -->
           <rect x="0" y="151" width="40" height="5" rx="2.5" fill="url(#return-grad)" filter="url(#glow)" clip-path="url(#return-clip)">
             <animateTransform attributeName="transform" type="translate" from="880 0" to="-60 0" dur="4s" repeatCount="indefinite" calcMode="linear" begin="1.8s"/>
           </rect>
 
-          <!-- ROLE LABELS below pipe -->
           <text x="112" y="106" text-anchor="middle" font-family="DM Sans" font-size="9" letter-spacing="1.5" fill="rgba(17,16,9,0.38)">INTAKE</text>
           <text x="370" y="106" text-anchor="middle" font-family="DM Sans" font-size="9" letter-spacing="1.5" fill="rgba(17,16,9,0.38)">RESEARCH</text>
           <text x="628" y="106" text-anchor="middle" font-family="DM Sans" font-size="9" letter-spacing="1.5" fill="rgba(17,16,9,0.38)">VALIDATION</text>
           <text x="840" y="106" text-anchor="middle" font-family="DM Sans" font-size="9" letter-spacing="1.5" fill="rgba(17,16,9,0.38)">SYNTHESIS</text>
 
-          <!-- RETURN LABEL -->
           <text x="476" y="175" text-anchor="middle" font-family="DM Sans" font-size="8.5" letter-spacing="1.5" fill="rgba(122,28,46,0.35)" font-style="italic">validated result returns</text>
         </svg>
       </div>
 
-      <!-- VOICE QUOTES BELOW PIPE -->
       <div class="pipe-quotes">
         <div class="pipe-quote">
           <div class="pq-agent">Chanelle</div>
@@ -1039,9 +984,6 @@ footer{
   </div>
 </section>
 
-<!-- ══════════════════ FEATURES ══════════════════ -->
-
-<!-- ══════════════════ FEEDBACK ══════════════════ -->
 <section class="fb-section" id="feedback">
   <div class="fb-main reveal">
     <div class="fb-text-col">
@@ -1063,13 +1005,11 @@ footer{
   </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
 <footer>
   <div class="foot-brand"><div class="foot-brand-dot"></div>Mr P &nbsp;·&nbsp; <span style="font-family:var(--font-b);font-size:12px;font-weight:300;color:var(--muted2);letter-spacing:.06em;">Agent Assistant Guide</span></div>
   <div class="foot-note">Issued by Luli Digital Agency &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Edition 001</div>
 </footer>
 
-<!-- ══ LAUNCHER ══ -->
 <button id="launcher" onclick="toggleWs()" aria-label="Open assistant workspace">
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20">
     <rect x="2" y="2" width="16" height="16" rx="2"/>
@@ -1077,32 +1017,31 @@ footer{
   </svg>
 </button>
 
-<!-- ══ WORKSPACE PANEL ══ -->
 <div id="ws">
   <div class="ws-head">
     <div class="ws-head-l">
-      <div class="ws-panel-name">Assistant Workspace</div>
-      <div class="ws-panel-sub">Private Legal System</div>
+      <div class="ws-panel-name">Send Fiker Feedback</div>
+      <div class="ws-panel-sub">Notes, improvements, and feature ideas</div>
     </div>
     <button class="ws-close-btn" onclick="toggleWs()">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2l10 10M12 2L2 12"/></svg>
     </button>
   </div>
   <div class="ws-tabs">
-    <button class="ws-tab on" onclick="wsTab('ask',this)">Ask</button>
-    <button class="ws-tab" onclick="wsTab('feedback',this)">Feedback</button>
+    <button class="ws-tab" onclick="wsTab('ask',this)">Assistant</button>
+    <button class="ws-tab on" onclick="wsTab('feedback',this)">Feedback</button>
   </div>
   <div class="ws-body">
-    <div class="ws-pane on" id="pane-ask">
+    <div class="ws-pane" id="pane-ask">
       <div class="ws-msgs" id="ws-msgs">
         <div class="wm bot">
-          <div class="wm-b">System ready. Start from a case, email, document, or research question.</div>
+          <div class="wm-b">Good day — I’m Lily. Share feedback and I’ll send it to Fiker.</div>
           <div class="wm-t">Now</div>
         </div>
       </div>
     </div>
-    <div class="ws-pane" id="pane-feedback">
-      <p class="fbp-intro">Share what should be improved, refined, or added next. The bot will deliver your message to Fiker.</p>
+    <div class="ws-pane on" id="pane-feedback">
+      <p class="fbp-intro">Share what should be improved, refined, or added next. Lily will help capture it and send it through to Fiker.</p>
       <textarea
         class="fbp-ta"
         id="panel-fb"
@@ -1119,18 +1058,18 @@ footer{
           <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </button>
       </div>
-      <div class="fbp-sent" id="panel-fb-sent">Note passed to Fiker.</div>
+      <div class="fbp-sent" id="panel-fb-sent">Sent to Fiker.</div>
     </div>
   </div>
-  <div id="ask-footer">
+  <div id="ask-footer" style="display:none;">
     <div class="ws-chips">
-      <button class="chip" onclick="askChip('Summarise a recent email')">Summarise email</button>
-      <button class="chip" onclick="askChip('Draft a reply to a client')">Draft reply</button>
-      <button class="chip" onclick="askChip('Prepare a case brief')">Case brief</button>
-      <button class="chip" onclick="askChip('Start a research task')">Research</button>
+      <button class="chip" onclick="askChip('I want to report a UI issue')">UI issue</button>
+      <button class="chip" onclick="askChip('I want to suggest a new feature')">New feature</button>
+      <button class="chip" onclick="askChip('Something feels unclear in the workflow')">Workflow feedback</button>
+      <button class="chip" onclick="askChip('I want to report a bug')">Bug report</button>
     </div>
     <div class="ws-input-row">
-      <textarea class="ws-input" id="ws-in" placeholder="Ask the system..." onkeydown="wsKey(event)" oninput="wsResize(this)" rows="1"></textarea>
+      <textarea class="ws-input" id="ws-in" placeholder="Tell Lily what should be improved..." onkeydown="wsKey(event)" oninput="wsResize(this)" rows="1"></textarea>
       <button class="ws-send" onclick="wsSend()" aria-label="Send">
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" width="14" height="14"><path d="M12 2L2 6l4 2 2 4z"/></svg>
       </button>
@@ -1139,94 +1078,235 @@ footer{
 </div>
 
 <script>
+const API_BASE = 'https://mrpsbot-vercel.vercel.app';
+
 /* cursor */
-const cur=document.getElementById('cur');
-document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';});
-document.querySelectorAll('button,a,.agent-block,.feat,.cap,.chip,.flow-step,.contents-row').forEach(el=>{
-  el.addEventListener('mouseenter',()=>cur.classList.add('lg'));
-  el.addEventListener('mouseleave',()=>cur.classList.remove('lg'));
+const cur = document.getElementById('cur');
+if (cur) {
+  document.addEventListener('mousemove', (e) => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top = e.clientY + 'px';
+  });
+
+  document.querySelectorAll('button,a,.agent-block,.cap,.chip,.contents-row').forEach((el) => {
+    el.addEventListener('mouseenter', () => cur.classList.add('lg'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('lg'));
+  });
+}
+
+/* reveal */
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) e.target.classList.add('vis');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach((el) => ro.observe(el));
+
+/* workspace */
+let open = false;
+let sending = false;
+
+const ws = document.getElementById('ws');
+const btn = document.getElementById('launcher');
+const msgs = document.getElementById('ws-msgs');
+const input = document.getElementById('ws-in');
+const panelFb = document.getElementById('panel-fb');
+const panelSent = document.getElementById('panel-fb-sent');
+const askFooter = document.getElementById('ask-footer');
+
+function toggleWs(force) {
+  open = typeof force === 'boolean' ? force : !open;
+  ws.classList.toggle('open', open);
+  btn.classList.toggle('open', open);
+
+  if (open && msgs && !msgs.dataset.welcomed) {
+    msgs.dataset.welcomed = 'true';
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && open) toggleWs(false);
 });
 
-/* scroll reveal */
-const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-
-/* workspace panel */
-let open=false;
-const ws=document.getElementById('ws');
-const btn=document.getElementById('launcher');
-function toggleWs(fo){open=fo!==undefined?fo:!open;ws.classList.toggle('open',open);btn.classList.toggle('open',open);}
-function openWs(){toggleWs(true);}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open)toggleWs(false);});
-
 /* tabs */
-function wsTab(name,el){
-  document.querySelectorAll('.ws-tab').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
-  document.querySelectorAll('.ws-pane').forEach(p=>p.classList.remove('on'));
-  document.getElementById('pane-'+name).classList.add('on');
-  document.getElementById('ask-footer').style.display=name==='ask'?'block':'none';
+function wsTab(name, el) {
+  document.querySelectorAll('.ws-tab').forEach(t => t.classList.remove('on'));
+  if (el) el.classList.add('on');
+
+  document.querySelectorAll('.ws-pane').forEach(p => p.classList.remove('on'));
+  const pane = document.getElementById('pane-' + name);
+  if (pane) pane.classList.add('on');
+
+  if (askFooter) askFooter.style.display = name === 'ask' ? 'block' : 'none';
 }
 
-/* messages */
-function now(){const d=new Date();return d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');}
-function addMsg(t,role){
-  const m=document.getElementById('ws-msgs');
-  const d=document.createElement('div');d.className='wm '+role;
-  d.innerHTML='<div class="wm-b">'+t+'</div><div class="wm-t">'+now()+'</div>';
-  m.appendChild(d);m.parentElement.scrollTop=m.parentElement.scrollHeight;
+/* helpers */
+function now() {
+  const d = new Date();
+  return d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0');
 }
-function addTyping(){
-  const m=document.getElementById('ws-msgs');
-  const d=document.createElement('div');d.className='wm bot';d.id='typing';
-  d.innerHTML='<div class="wm-b"><div class="typing"><span></span><span></span><span></span></div></div>';
-  m.appendChild(d);m.parentElement.scrollTop=m.parentElement.scrollHeight;
-}
-function removeTyping(){const t=document.getElementById('typing');if(t)t.remove();}
 
-const rs={
-  'summarise a recent email':'To summarise an email, paste the text or share the subject line. If your Microsoft 365 connection is active, I can access it directly.',
-  'draft a reply to a client':'Share the context — the original message, the matter, and the tone you want. I will prepare a professional draft for your review.',
-  'prepare a case brief':'Provide the case reference and key facts. I will structure a brief drawing on your case files and any relevant research.',
-  'start a research task':'What is the research question? I will prepare a privacy-safe query and route it through Sofie. Validated output will return here.',
-};
-const dflt=[
-  'Understood. Please provide any relevant detail — case reference, document, or specific instruction — and I will proceed.',
-  'Noted. If this requires external research, it will route through Sofie and be validated by Mimi before returning to you.',
-  'I can assist with that. To proceed accurately, please share the relevant context or reference.',
-];
-function respond(text){
-  addTyping();
-  setTimeout(()=>{
+function addMsg(text, role) {
+  if (!msgs) return;
+  const m = document.createElement('div');
+  m.className = 'wm ' + role;
+
+  const safeText = String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  m.innerHTML = '<div class="wm-b">' + safeText + '</div><div class="wm-t">' + now() + '</div>';
+  msgs.appendChild(m);
+  if (msgs.parentElement) msgs.parentElement.scrollTop = msgs.parentElement.scrollHeight;
+}
+
+function addTyping() {
+  if (!msgs) return;
+  const d = document.createElement('div');
+  d.className = 'wm bot';
+  d.id = 'typing';
+  d.innerHTML = '<div class="wm-b"><div class="typing"><span></span><span></span><span></span></div></div>';
+  msgs.appendChild(d);
+  if (msgs.parentElement) msgs.parentElement.scrollTop = msgs.parentElement.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+function setSending(v) {
+  sending = v;
+  const wsSendBtn = document.querySelector('.ws-send');
+  const fbSendBtn = document.querySelector('.fbp-send');
+
+  if (wsSendBtn) wsSendBtn.disabled = v;
+  if (fbSendBtn) fbSendBtn.disabled = v;
+  if (input) input.disabled = v;
+  if (panelFb) panelFb.disabled = v;
+}
+
+function showPanelNotice(text) {
+  if (!panelSent) return;
+  panelSent.textContent = text;
+  panelSent.classList.add('show');
+  setTimeout(() => panelSent.classList.remove('show'), 4000);
+}
+
+async function callChat(message) {
+  const res = await fetch(`${API_BASE}/api/chat`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ message })
+  });
+
+  if (!res.ok) throw new Error('chat error');
+  return res.json();
+}
+
+async function callFeedback(payload) {
+  const res = await fetch(`${API_BASE}/api/feedback`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      message: JSON.stringify(payload),
+      source: 'mrpsagentguide.lulidigital.com'
+    })
+  });
+
+  if (!res.ok) throw new Error('feedback error');
+  return res.json();
+}
+
+/* ask flow */
+async function wsSend() {
+  if (sending || !input) return;
+
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMsg(text, 'user');
+  input.value = '';
+  input.style.height = 'auto';
+
+  try {
+    setSending(true);
+    addTyping();
+
+    const data = await callChat(text);
+
     removeTyping();
-    const k=Object.keys(rs).find(k=>text.toLowerCase().includes(k));
-    addMsg(k?rs[k]:dflt[Math.floor(Math.random()*dflt.length)],'bot');
-    // BACKEND: POST /api/chat {message:text}
-  },700+Math.random()*500);
-}
-function askChip(t){addMsg(t,'user');respond(t);}
-function wsSend(){
-  const inp=document.getElementById('ws-in');
-  const t=inp.value.trim();if(!t)return;
-  addMsg(t,'user');inp.value='';inp.style.height='auto';respond(t);
-}
-function wsKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();wsSend();}}
-function wsResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,90)+'px';}
+    addMsg(data.reply || 'Something went wrong — please try again.', 'bot');
 
-/* feedback */
-function sendMainFb(){
-  const t=document.getElementById('main-fb').value.trim();if(!t)return;
-  const el=document.getElementById('main-fb');el.value='';el.style.height='auto';
-  const c=document.getElementById('main-fb-sent');c.classList.add('show');
-  setTimeout(()=>c.classList.remove('show'),4000);
-  // BACKEND: POST /api/feedback {message:t, source:'main'}
+    if (data.done && data.feedback) {
+      try {
+        await callFeedback(data.feedback);
+        addMsg('Sent to Fiker.', 'bot');
+      } catch (err) {
+        addMsg('Your message was received, but sending failed. Please try again.', 'bot');
+      }
+    }
+  } catch (err) {
+    removeTyping();
+    addMsg('Something went wrong — please try again.', 'bot');
+  } finally {
+    setSending(false);
+  }
 }
-function sendPanelFb(){
-  const t=document.getElementById('panel-fb').value.trim();if(!t)return;
-  const el=document.getElementById('panel-fb');el.value='';el.style.height='auto';
-  const c=document.getElementById('panel-fb-sent');c.classList.add('show');
-  setTimeout(()=>c.classList.remove('show'),4000);
-  // BACKEND: POST /api/feedback {message:t, source:'panel'}
+
+function wsKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    wsSend();
+  }
+}
+
+function wsResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 90) + 'px';
+}
+
+function askChip(text) {
+  wsTab('ask', document.querySelectorAll('.ws-tab')[0]);
+  if (input) {
+    input.value = text;
+    wsSend();
+  }
+}
+
+/* feedback flow */
+async function sendPanelFb() {
+  if (sending || !panelFb) return;
+
+  const text = panelFb.value.trim();
+  if (!text) return;
+
+  try {
+    setSending(true);
+    addMsg(text, 'user');
+    addTyping();
+
+    const data = await callChat(text);
+
+    removeTyping();
+    addMsg(data.reply || 'Something went wrong — please try again.', 'bot');
+
+    if (data.done && data.feedback) {
+      await callFeedback(data.feedback);
+      panelFb.value = '';
+      panelFb.style.height = 'auto';
+      showPanelNotice('Sent to Fiker.');
+    } else {
+      showPanelNotice('Lily is still clarifying your feedback.');
+    }
+  } catch (err) {
+    removeTyping();
+    showPanelNotice('Something went wrong — please try again.');
+  } finally {
+    setSending(false);
+  }
 }
 </script>
 </body>
