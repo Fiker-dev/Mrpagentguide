@@ -177,8 +177,6 @@ nav{
 .section{position:relative;z-index:2;background:var(--paper);}
 .section-alt{background:var(--white);}
 .inner{padding:80px clamp(24px,5vw,72px);}
-.inner-sm{padding:60px clamp(24px,5vw,72px);}
-
 .eyebrow-row{
   display:flex;align-items:center;gap:12px;
   margin-bottom:14px;
@@ -189,12 +187,12 @@ nav{
 }
 .eyebrow-rule{flex:0 0 28px;height:1px;background:var(--burg);opacity:.5;}
 
+/* agent cards */
 .agent-block{
   border:1px solid var(--rule2);
   background:var(--white);
   position:relative;overflow:hidden;
 }
-.agent-block + .agent-block{margin-top:1px;}
 .agent-block.chanelle{border-left:3px solid var(--burg);}
 .agent-block.sofie{border-left:3px solid rgba(122,28,46,.45);}
 .agent-block.mimi{border-left:3px solid rgba(122,28,46,.22);}
@@ -287,7 +285,7 @@ nav{
   .ag-r{padding:0 38px 38px;}
 }
 
-/* pipeline connectors */
+/* connectors */
 .pipeline-conn{
   display:flex;align-items:center;
   padding:0 clamp(24px,5vw,72px);
@@ -348,7 +346,6 @@ nav{
   background:radial-gradient(ellipse 60% 50% at 95% 5%,rgba(122,28,46,.04) 0%,transparent 65%);
 }
 .collab-inner{padding:80px clamp(24px,5vw,72px);position:relative;z-index:1;}
-
 .collab-eyebrow{
   font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
   color:var(--burg);font-weight:500;margin-bottom:14px;
@@ -367,7 +364,6 @@ nav{
   color:var(--muted);
   max-width:480px;line-height:1.75;margin-bottom:56px;
 }
-
 .pipe-container{width:100%;}
 .pipe-svg-wrap{
   width:100%;
@@ -409,7 +405,6 @@ nav{
 
 /* feedback */
 .fb-section{padding:24px clamp(24px,5vw,72px) 80px;position:relative;z-index:2;}
-.fb-wrap{display:none;}
 .fb-main{
   border-top:1px solid var(--rule3);
   padding-top:80px;
@@ -429,8 +424,6 @@ nav{
   padding-right:68px;
   padding-bottom:4px;
 }
-.fb-editorial-spacer{display:none;}
-.fb-editorial-r{display:none;}
 .fb-tag{
   font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;
   color:var(--burg);font-weight:500;
@@ -487,18 +480,11 @@ nav{
   0%,100%{transform:translateX(0);}
   50%{transform:translateX(5px);}
 }
-
 @media(max-width:740px){
   .fb-main{flex-direction:column;align-items:flex-start;gap:30px;}
   .fb-arrow-right{width:100%;justify-content:flex-start;padding-right:0;}
   .fb-h-arrow{width:100%;max-width:220px;}
 }
-
-.fb-sent{
-  font-size:12px;font-style:italic;color:var(--burg);
-  margin-top:8px;display:none;
-}
-.fb-sent.show{display:block;}
 
 /* footer */
 footer{
@@ -541,7 +527,7 @@ footer{
   50%{transform:scale(1.22);opacity:0;}
 }
 
-/* workspace panel */
+/* workspace */
 #ws{
   position:fixed;bottom:90px;right:28px;z-index:9998;
   width:335px;
@@ -570,19 +556,7 @@ footer{
 }
 .ws-close-btn:hover{color:var(--ink);}
 
-.ws-tabs{display:flex;border-bottom:1px solid var(--rule2);flex-shrink:0;}
-.ws-tab{
-  flex:1;padding:10px 0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-  text-align:center;cursor:pointer;border:none;background:transparent;
-  color:var(--muted2);font-family:var(--font-b);font-weight:400;
-  border-bottom:2px solid transparent;transition:color .2s,border-color .2s;
-}
-.ws-tab.on{color:var(--burg);border-bottom-color:var(--burg);}
-
-.ws-body{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--rule2) transparent;}
-.ws-pane{display:none;padding:16px;}
-.ws-pane.on{display:block;}
-
+.ws-body{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--rule2) transparent;padding:16px;}
 .ws-msgs{display:flex;flex-direction:column;gap:9px;margin-bottom:8px;}
 .wm{max-width:90%;}
 .wm.bot{align-self:flex-start;}
@@ -592,14 +566,6 @@ footer{
 .wm.user .wm-b{background:var(--ink);color:var(--paper);}
 .wm-t{font-size:10px;color:var(--muted2);margin-top:3px;letter-spacing:.04em;}
 .wm.user .wm-t{text-align:right;}
-
-.ws-chips{display:flex;flex-wrap:wrap;gap:5px;padding:0 16px 10px;}
-.chip{
-  padding:5px 11px;border:1px solid var(--rule2);background:transparent;
-  font-size:11px;color:var(--muted);cursor:pointer;letter-spacing:.02em;
-  font-family:var(--font-b);transition:background .2s,border-color .2s,color .2s;
-}
-.chip:hover{background:var(--burg-dim);border-color:var(--burg-mid);color:var(--burg2);}
 
 .typing{display:inline-flex;gap:3px;padding:10px 13px;}
 .typing span{width:4px;height:4px;border-radius:50%;background:var(--burg);opacity:.4;animation:td 1.2s ease-in-out infinite;}
@@ -615,7 +581,7 @@ footer{
   flex:1;background:var(--paper);border:1px solid var(--rule2);
   padding:9px 12px;font-size:13px;font-weight:300;color:var(--ink);
   font-family:var(--font-b);resize:none;outline:none;
-  min-height:38px;max-height:90px;line-height:1.5;
+  min-height:38px;max-height:110px;line-height:1.5;
   transition:border-color .2s;
 }
 .ws-input:focus{border-color:var(--burg-mid);}
@@ -626,34 +592,10 @@ footer{
   flex-shrink:0;transition:background .2s,opacity .2s;
 }
 .ws-send:hover{background:var(--burg);}
-.ws-send:disabled,.fbp-send:disabled{opacity:.45;cursor:not-allowed;}
+.ws-send:disabled{opacity:.45;cursor:not-allowed;}
 
-.fbp-intro{font-size:13px;font-weight:300;font-style:italic;color:var(--muted);line-height:1.7;margin-bottom:14px;}
-.fbp-ta{
-  width:100%;background:transparent;border:none;border-bottom:1px solid var(--rule2);
-  padding:4px 0 12px;
-  font-family:var(--font-d);font-size:16px;font-weight:300;font-style:italic;
-  color:var(--ink);resize:none;outline:none;min-height:70px;line-height:1.6;
-  transition:border-color .3s;display:block;
-}
-.fbp-ta:focus{border-color:var(--burg-mid);}
-.fbp-ta::placeholder{color:var(--muted2);}
-.fbp-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding-top:10px;margin-bottom:8px;
-}
-.fbp-private{font-size:10px;color:var(--muted2);font-style:italic;display:flex;align-items:center;gap:5px;}
-.fbp-send{
-  background:none;border:none;cursor:pointer;
-  font-family:var(--font-b);font-size:11px;font-weight:500;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
-  display:flex;align-items:center;gap:5px;padding:0;transition:color .2s,opacity .2s;
-}
-.fbp-send:hover{color:var(--burg);}
-.fbp-sent{font-size:11px;font-style:italic;color:var(--burg);display:none;}
+.fbp-sent{font-size:11px;font-style:italic;color:var(--burg);display:none;padding:0 16px 12px;}
 .fbp-sent.show{display:block;}
-
-#ask-footer{flex-shrink:0;}
 
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease;}
 .reveal.vis{opacity:1;transform:translateY(0);}
@@ -1010,7 +952,7 @@ footer{
   <div class="foot-note">Issued by Luli Digital Agency &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Edition 001</div>
 </footer>
 
-<button id="launcher" onclick="toggleWs()" aria-label="Open assistant workspace">
+<button id="launcher" onclick="toggleWs()" aria-label="Open Lily">
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20">
     <rect x="2" y="2" width="16" height="16" rx="2"/>
     <path d="M6 8h8M6 11h5"/>
@@ -1020,60 +962,30 @@ footer{
 <div id="ws">
   <div class="ws-head">
     <div class="ws-head-l">
-      <div class="ws-panel-name">Send Fiker Feedback</div>
-      <div class="ws-panel-sub">Notes, improvements, and feature ideas</div>
+      <div class="ws-panel-name">Talk to Lily</div>
+      <div class="ws-panel-sub">Share what feels unclear, missing, or worth improving</div>
     </div>
     <button class="ws-close-btn" onclick="toggleWs()">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2l10 10M12 2L2 12"/></svg>
     </button>
   </div>
-  <div class="ws-tabs">
-    <button class="ws-tab" onclick="wsTab('ask',this)">Assistant</button>
-    <button class="ws-tab on" onclick="wsTab('feedback',this)">Feedback</button>
-  </div>
+
   <div class="ws-body">
-    <div class="ws-pane" id="pane-ask">
-      <div class="ws-msgs" id="ws-msgs">
-        <div class="wm bot">
-          <div class="wm-b">Good day — I’m Lily. Share feedback and I’ll send it to Fiker.</div>
-          <div class="wm-t">Now</div>
-        </div>
+    <div class="ws-msgs" id="ws-msgs">
+      <div class="wm bot">
+        <div class="wm-b">Good day — I’m Lily. Tell me what feels off, unclear, or worth improving, and I’ll help you send it to Fiker.</div>
+        <div class="wm-t">Now</div>
       </div>
-    </div>
-    <div class="ws-pane on" id="pane-feedback">
-      <p class="fbp-intro">Share what should be improved, refined, or added next. Lily will help capture it and send it through to Fiker.</p>
-      <textarea
-        class="fbp-ta"
-        id="panel-fb"
-        placeholder="Something to improve, add, or refine..."
-        oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,160)+'px'"
-      ></textarea>
-      <div class="fbp-row">
-        <span class="fbp-private">
-          <svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 1L1 3.5v3.5c0 3 2.5 5.5 6 6 3.5-.5 6-3 6-6V3.5z"/></svg>
-          Private note to Fiker
-        </span>
-        <button class="fbp-send" onclick="sendPanelFb()">
-          Send
-          <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
-        </button>
-      </div>
-      <div class="fbp-sent" id="panel-fb-sent">Sent to Fiker.</div>
     </div>
   </div>
-  <div id="ask-footer" style="display:none;">
-    <div class="ws-chips">
-      <button class="chip" onclick="askChip('I want to report a UI issue')">UI issue</button>
-      <button class="chip" onclick="askChip('I want to suggest a new feature')">New feature</button>
-      <button class="chip" onclick="askChip('Something feels unclear in the workflow')">Workflow feedback</button>
-      <button class="chip" onclick="askChip('I want to report a bug')">Bug report</button>
-    </div>
-    <div class="ws-input-row">
-      <textarea class="ws-input" id="ws-in" placeholder="Tell Lily what should be improved..." onkeydown="wsKey(event)" oninput="wsResize(this)" rows="1"></textarea>
-      <button class="ws-send" onclick="wsSend()" aria-label="Send">
-        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" width="14" height="14"><path d="M12 2L2 6l4 2 2 4z"/></svg>
-      </button>
-    </div>
+
+  <div class="fbp-sent" id="panel-fb-sent">Thank you — I’ve sent that to Fiker.</div>
+
+  <div class="ws-input-row">
+    <textarea class="ws-input" id="ws-in" placeholder="Tell Lily what you’d like improved..." onkeydown="wsKey(event)" oninput="wsResize(this)" rows="1"></textarea>
+    <button class="ws-send" onclick="wsSend()" aria-label="Send">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" width="14" height="14"><path d="M12 2L2 6l4 2 2 4z"/></svg>
+    </button>
   </div>
 </div>
 
@@ -1088,7 +1000,7 @@ if (cur) {
     cur.style.top = e.clientY + 'px';
   });
 
-  document.querySelectorAll('button,a,.agent-block,.cap,.chip,.contents-row').forEach((el) => {
+  document.querySelectorAll('button,a,.agent-block,.cap,.contents-row').forEach((el) => {
     el.addEventListener('mouseenter', () => cur.classList.add('lg'));
     el.addEventListener('mouseleave', () => cur.classList.remove('lg'));
   });
@@ -1111,35 +1023,17 @@ const ws = document.getElementById('ws');
 const btn = document.getElementById('launcher');
 const msgs = document.getElementById('ws-msgs');
 const input = document.getElementById('ws-in');
-const panelFb = document.getElementById('panel-fb');
 const panelSent = document.getElementById('panel-fb-sent');
-const askFooter = document.getElementById('ask-footer');
 
 function toggleWs(force) {
   open = typeof force === 'boolean' ? force : !open;
   ws.classList.toggle('open', open);
   btn.classList.toggle('open', open);
-
-  if (open && msgs && !msgs.dataset.welcomed) {
-    msgs.dataset.welcomed = 'true';
-  }
 }
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && open) toggleWs(false);
 });
-
-/* tabs */
-function wsTab(name, el) {
-  document.querySelectorAll('.ws-tab').forEach(t => t.classList.remove('on'));
-  if (el) el.classList.add('on');
-
-  document.querySelectorAll('.ws-pane').forEach(p => p.classList.remove('on'));
-  const pane = document.getElementById('pane-' + name);
-  if (pane) pane.classList.add('on');
-
-  if (askFooter) askFooter.style.display = name === 'ask' ? 'block' : 'none';
-}
 
 /* helpers */
 function now() {
@@ -1147,23 +1041,22 @@ function now() {
   return d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0');
 }
 
-function addMsg(text, role) {
-  if (!msgs) return;
-  const m = document.createElement('div');
-  m.className = 'wm ' + role;
-
-  const safeText = String(text)
+function escapeHtml(text) {
+  return String(text)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
+}
 
-  m.innerHTML = '<div class="wm-b">' + safeText + '</div><div class="wm-t">' + now() + '</div>';
+function addMsg(text, role) {
+  const m = document.createElement('div');
+  m.className = 'wm ' + role;
+  m.innerHTML = '<div class="wm-b">' + escapeHtml(text) + '</div><div class="wm-t">' + now() + '</div>';
   msgs.appendChild(m);
   if (msgs.parentElement) msgs.parentElement.scrollTop = msgs.parentElement.scrollHeight;
 }
 
 function addTyping() {
-  if (!msgs) return;
   const d = document.createElement('div');
   d.className = 'wm bot';
   d.id = 'typing';
@@ -1179,17 +1072,12 @@ function removeTyping() {
 
 function setSending(v) {
   sending = v;
-  const wsSendBtn = document.querySelector('.ws-send');
-  const fbSendBtn = document.querySelector('.fbp-send');
-
-  if (wsSendBtn) wsSendBtn.disabled = v;
-  if (fbSendBtn) fbSendBtn.disabled = v;
+  const sendBtn = document.querySelector('.ws-send');
+  if (sendBtn) sendBtn.disabled = v;
   if (input) input.disabled = v;
-  if (panelFb) panelFb.disabled = v;
 }
 
 function showPanelNotice(text) {
-  if (!panelSent) return;
   panelSent.textContent = text;
   panelSent.classList.add('show');
   setTimeout(() => panelSent.classList.remove('show'), 4000);
@@ -1202,7 +1090,10 @@ async function callChat(message) {
     body: JSON.stringify({ message })
   });
 
-  if (!res.ok) throw new Error('chat error');
+  if (!res.ok) {
+    throw new Error('chat_error');
+  }
+
   return res.json();
 }
 
@@ -1216,13 +1107,16 @@ async function callFeedback(payload) {
     })
   });
 
-  if (!res.ok) throw new Error('feedback error');
+  if (!res.ok) {
+    throw new Error('feedback_error');
+  }
+
   return res.json();
 }
 
-/* ask flow */
+/* chat flow */
 async function wsSend() {
-  if (sending || !input) return;
+  if (sending) return;
 
   const text = input.value.trim();
   if (!text) return;
@@ -1238,19 +1132,21 @@ async function wsSend() {
     const data = await callChat(text);
 
     removeTyping();
-    addMsg(data.reply || 'Something went wrong — please try again.', 'bot');
+    addMsg(data.reply || 'Something went wrong on my side. Please try again in a moment.', 'bot');
 
-    if (data.done && data.feedback) {
+    if (data.done === true && data.feedback) {
       try {
         await callFeedback(data.feedback);
-        addMsg('Sent to Fiker.', 'bot');
+        addMsg('Thank you — I’ve sent that to Fiker.', 'bot');
+        showPanelNotice('Thank you — I’ve sent that to Fiker.');
       } catch (err) {
-        addMsg('Your message was received, but sending failed. Please try again.', 'bot');
+        addMsg('I understood your note, but I couldn’t send it just yet. Please try again.', 'bot');
+        showPanelNotice('I understood your note, but I couldn’t send it just yet. Please try again.');
       }
     }
   } catch (err) {
     removeTyping();
-    addMsg('Something went wrong — please try again.', 'bot');
+    addMsg('Something went wrong on my side. Please try again in a moment.', 'bot');
   } finally {
     setSending(false);
   }
@@ -1265,48 +1161,7 @@ function wsKey(e) {
 
 function wsResize(el) {
   el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 90) + 'px';
-}
-
-function askChip(text) {
-  wsTab('ask', document.querySelectorAll('.ws-tab')[0]);
-  if (input) {
-    input.value = text;
-    wsSend();
-  }
-}
-
-/* feedback flow */
-async function sendPanelFb() {
-  if (sending || !panelFb) return;
-
-  const text = panelFb.value.trim();
-  if (!text) return;
-
-  try {
-    setSending(true);
-    addMsg(text, 'user');
-    addTyping();
-
-    const data = await callChat(text);
-
-    removeTyping();
-    addMsg(data.reply || 'Something went wrong — please try again.', 'bot');
-
-    if (data.done && data.feedback) {
-      await callFeedback(data.feedback);
-      panelFb.value = '';
-      panelFb.style.height = 'auto';
-      showPanelNotice('Sent to Fiker.');
-    } else {
-      showPanelNotice('Lily is still clarifying your feedback.');
-    }
-  } catch (err) {
-    removeTyping();
-    showPanelNotice('Something went wrong — please try again.');
-  } finally {
-    setSending(false);
-  }
+  el.style.height = Math.min(el.scrollHeight, 110) + 'px';
 }
 </script>
 </body>
