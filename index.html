@@ -1507,7 +1507,7 @@
     <div class="foot-note">Issued by Luli Digital Agency &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Edition 001</div>
   </footer>
 
-  <button id="launcher" onclick="toggleWs()" aria-label="Open Lily">
+  <button id="launcher" onclick="toggleWs()" aria-label="Open Lana">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20">
       <rect x="2" y="2" width="16" height="16" rx="2"/>
       <path d="M6 8h8M6 11h5"/>
@@ -1517,7 +1517,7 @@
   <div id="ws">
     <div class="ws-head">
       <div class="ws-head-l">
-        <div class="ws-panel-name">Talk to Lily</div>
+        <div class="ws-panel-name">Talk to Lana</div>
       </div>
       <button class="ws-close-btn" onclick="toggleWs()">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2l10 10M12 2L2 12"/></svg>
@@ -1527,7 +1527,7 @@
     <div class="ws-body">
       <div class="ws-msgs" id="ws-msgs">
         <div class="wm bot">
-          <div class="wm-b">Hello — I’m Lily, Fiker’s Assistant. Tell me what’s not working, missing, or what you wish the agents could do, and I’ll pass it to Fiker.</div>
+          <div class="wm-b">Hello — I’m Lana, Fiker’s Assistant. Tell me what’s not working, missing, or what you wish the agents could do, and I’ll pass it to Fiker.</div>
           <div class="wm-t">Now</div>
         </div>
       </div>
@@ -1536,7 +1536,7 @@
     <div class="fbp-sent" id="panel-fb-sent">Thank you — I’ve sent that to Fiker.</div>
 
     <div class="ws-input-row">
-      <textarea class="ws-input" id="ws-in" placeholder="Tell Lily what you’d like improved..." onkeydown="wsKey(event)" oninput="wsResize(this)" rows="1"></textarea>
+      <textarea class="ws-input" id="ws-in" placeholder="Tell Lana what you’d like improved..." onkeydown="wsKey(event)" oninput="wsResize(this)" rows="1"></textarea>
       <button class="ws-send" id="ws-send-btn" onclick="wsSend()" aria-label="Send">
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" width="14" height="14"><path d="M12 2L2 6l4 2 2 4z"/></svg>
       </button>
@@ -1611,9 +1611,9 @@
       let cleaned = text.trim();
 
       const patterns = [
-        /^hello\s*[—-]\s*i['’]m lily(?:,\s*fiker['’]s assistant)?\.\s*/i,
-        /^good\s+(morning|afternoon|evening|day)\s*[—-]\s*i['’]m lily(?:,\s*fiker['’]s assistant)?\.\s*/i,
-        /^i['’]m lily(?:,\s*fiker['’]s assistant)?\.\s*/i,
+        /^hello\s*[—-]\s*i['’]m lana(?:,\s*fiker['’]s assistant)?\.\s*/i,
+        /^good\s+(morning|afternoon|evening|day)\s*[—-]\s*i['’]m lana(?:,\s*fiker['’]s assistant)?\.\s*/i,
+        /^i['’]m lana(?:,\s*fiker['’]s assistant)?\.\s*/i,
         /^good\s+(morning|afternoon|evening|day)\s*[—-]\s*/i
       ];
 
@@ -1718,7 +1718,7 @@
 
     function maybeShowDailyGreeting() {
       const todayKey = new Date().toISOString().slice(0, 10);
-      const storageKey = 'lily-last-greeting-date';
+      const storageKey = 'lana-last-greeting-date';
       const lastGreetingDate = localStorage.getItem(storageKey);
 
       let greetingText = '';
