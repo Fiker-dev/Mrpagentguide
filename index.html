@@ -1578,6 +1578,13 @@
     const sendBtn = document.getElementById('ws-send-btn');
     const sentNote = document.getElementById('panel-fb-sent');
 
+    const conversationHistory = [
+      {
+        role: 'assistant',
+        text: 'Hello — I’m Lana, Fiker’s Assistant. Tell me what’s not working, missing, or what you wish the agents could do, and I’ll pass it to Fiker.'
+      }
+    ];
+
     function toggleWs(force) {
       wsOpen = typeof force === 'boolean' ? force : !wsOpen;
       if (ws) ws.classList.toggle('open', wsOpen);
@@ -1605,7 +1612,7 @@
         .replace(/>/g, '&gt;');
     }
 
-    function stripRepeatedLilyIntro(text) {
+    function stripRepeatedLanaIntro(text) {
       if (!text) return text;
 
       let cleaned = text.trim();
@@ -1627,7 +1634,7 @@
     function normalizeBotReply(text) {
       if (!text) return text;
 
-      let cleaned = stripRepeatedLilyIntro(text);
+      let cleaned = stripRepeatedLanaIntro(text);
 
       const repeatedPhrases = [
         /tell me what feels off, unclear, missing, or something you wish the agents could do[, ]*and i[’']ll help you send it to fiker\.?/ig,
@@ -1644,10 +1651,18 @@
       cleaned = cleaned.replace(/\s{2,}/g, ' ').trim();
 
       if (!cleaned) {
-        return "I’m here, Mr P.";
+        return 'I’m here, Mr P.';
       }
 
       return cleaned;
+    }
+
+    function pushHistory(role, text) {
+      conversationHistory.push({ role, text });
+
+      if (conversationHistory.length > 12) {
+        conversationHistory.splice(0, conversationHistory.length - 12);
+      }
     }
 
     function addMsg(text, role) {
@@ -1661,6 +1676,9 @@
       `;
 
       msgs.appendChild(wrapper);
+
+      if (role === 'user') pushHistory('user', text);
+      if (role === 'bot' || role === 'assistant') pushHistory('assistant', text);
 
       const body = document.querySelector('.ws-body');
       if (body) body.scrollTop = body.scrollHeight;
@@ -1740,7 +1758,11 @@
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({
+          message,
+          history: conversationHistory,
+          clientId: 'mr-p'
+        })
       });
 
       if (!response.ok) {
