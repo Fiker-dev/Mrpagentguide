@@ -1168,6 +1168,493 @@
         bottom: 20px;
       }
     }
+
+    /* Mobile + iPad optimisation only */
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      min-width: 320px;
+    }
+
+    img, svg, video, canvas {
+      max-width: 100%;
+      height: auto;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    textarea,
+    input,
+    button,
+    a {
+      touch-action: manipulation;
+    }
+
+    @media (max-width: 1024px) {
+      nav {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .mast-inner,
+      .inner,
+      .collab-inner,
+      .fb-section,
+      footer,
+      .pipeline-conn {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .mast-inner {
+        padding-top: 40px;
+      }
+
+      .inner,
+      .collab-inner {
+        padding-top: 64px;
+        padding-bottom: 64px;
+      }
+
+      .fb-section {
+        padding-top: 20px;
+        padding-bottom: 64px;
+      }
+
+      .guide-h1 {
+        font-size: clamp(40px, 8vw, 72px);
+      }
+
+      .agent-name {
+        font-size: clamp(36px, 7vw, 58px);
+      }
+
+      .ag-l {
+        padding: 32px 28px 28px 28px;
+      }
+
+      .ag-r {
+        padding: 32px 28px 32px 28px;
+      }
+
+      .caps {
+        gap: 8px;
+      }
+
+      .cap {
+        line-height: 1.4;
+      }
+
+      .pipeline-conn {
+        height: auto;
+        min-height: 64px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      .pipeline-label {
+        line-height: 1.5;
+      }
+
+      #ws {
+        max-height: min(520px, calc(100vh - 120px));
+        max-height: min(520px, calc(100dvh - 120px));
+      }
+    }
+
+    @media (max-width: 820px) {
+      .agent-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ag-vline {
+        display: none;
+      }
+
+      .ag-l {
+        padding: 28px 24px 22px 24px;
+      }
+
+      .ag-r {
+        padding: 0 24px 24px 24px;
+      }
+    }
+
+    @media (max-width: 740px) {
+      .masthead {
+        padding-top: 74px;
+      }
+
+      .mast-inner {
+        padding-top: 28px;
+      }
+
+      .mast-eyebrow,
+      .guide-kicker,
+      .guide-subtitle,
+      .eyebrow,
+      .collab-eyebrow,
+      .fb-tag,
+      .pipeline-label,
+      .agent-num,
+      .ag-r-label,
+      .boundary-label,
+      .av-label {
+        letter-spacing: .14em;
+      }
+
+      .mast-split {
+        grid-template-columns: 1fr;
+        padding-bottom: 34px;
+      }
+
+      .mast-v {
+        display: none;
+      }
+
+      .mast-l {
+        padding-right: 0;
+        padding-bottom: 24px;
+      }
+
+      .mast-r {
+        padding-left: 0;
+        padding-top: 0;
+      }
+
+      .guide-h1 {
+        font-size: clamp(36px, 12vw, 58px);
+        line-height: 1;
+      }
+
+      .mast-desc {
+        font-size: clamp(17px, 5vw, 22px);
+        line-height: 1.55;
+        padding-left: 14px;
+        margin-bottom: 22px;
+      }
+
+      .contents-row {
+        gap: 14px;
+        align-items: flex-start;
+        padding: 13px 0;
+      }
+
+      .contents-row > span:first-child {
+        flex: 1;
+        min-width: 0;
+        line-height: 1.45;
+      }
+
+      .c-num {
+        flex-shrink: 0;
+        white-space: nowrap;
+      }
+
+      .ticker {
+        height: 34px;
+      }
+
+      .tick-item {
+        padding: 0 18px;
+        font-size: 9px;
+        letter-spacing: .14em;
+      }
+
+      .agent-status {
+        flex-wrap: wrap;
+        row-gap: 6px;
+      }
+
+      .av-text {
+        font-size: clamp(16px, 5vw, 20px);
+        line-height: 1.62;
+      }
+
+      .boundary-text,
+      .pq-text,
+      .fb-desc {
+        line-height: 1.6;
+      }
+
+      .pipe-svg-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .pipe-svg {
+        min-width: 680px;
+      }
+
+      .fb-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+        padding-top: 56px;
+      }
+
+      .fb-arrow-right {
+        width: 100%;
+        justify-content: flex-start;
+        padding-right: 0;
+      }
+
+      .fb-h-arrow {
+        width: 100%;
+        max-width: 220px;
+      }
+
+      footer {
+        padding-top: 28px;
+        padding-bottom: 28px;
+      }
+
+      .foot-brand,
+      .foot-note {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      nav {
+        height: 54px;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .nav-brand {
+        font-size: 18px;
+      }
+
+      .masthead {
+        padding-top: 70px;
+      }
+
+      .mast-inner,
+      .inner,
+      .collab-inner,
+      .fb-section,
+      footer,
+      .pipeline-conn {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .mast-inner {
+        padding-top: 24px;
+      }
+
+      .inner,
+      .collab-inner {
+        padding-top: 52px;
+        padding-bottom: 52px;
+      }
+
+      .fb-section {
+        padding-bottom: 52px;
+      }
+
+      .guide-h1 {
+        font-size: clamp(32px, 12vw, 48px);
+      }
+
+      .guide-subtitle {
+        font-size: 12px;
+      }
+
+      .agent-name {
+        font-size: clamp(30px, 11vw, 44px);
+      }
+
+      .agent-role {
+        font-size: 10.5px;
+        line-height: 1.5;
+      }
+
+      .agent-status {
+        font-size: 10.5px;
+        padding: 6px 10px;
+      }
+
+      .ag-l {
+        padding: 24px 18px 18px 18px;
+      }
+
+      .ag-r {
+        padding: 0 18px 18px 18px;
+      }
+
+      .cap {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 9px 11px;
+      }
+
+      .boundary {
+        padding: 12px 13px;
+      }
+
+      .collab-h2 {
+        font-size: clamp(30px, 10vw, 40px);
+        line-height: 1.05;
+      }
+
+      .collab-sub {
+        font-size: 14px;
+        line-height: 1.65;
+        margin-bottom: 32px;
+      }
+
+      .pipe-quotes {
+        grid-template-columns: 1fr;
+      }
+
+      .pipe-quote {
+        padding: 16px 14px 18px;
+      }
+
+      .fb-h3 {
+        font-size: clamp(24px, 8vw, 32px);
+      }
+
+      .fb-desc {
+        max-width: none;
+      }
+
+      #launcher {
+        width: 48px;
+        height: 48px;
+        right: 16px;
+        bottom: 18px;
+      }
+
+      #ws {
+        width: calc(100vw - 24px);
+        right: 12px;
+        bottom: 74px;
+        max-height: min(78vh, 560px);
+        max-height: min(78dvh, 560px);
+      }
+
+      .ws-head {
+        padding: 14px 14px 12px;
+      }
+
+      .ws-body {
+        padding: 14px;
+      }
+
+      .ws-input-row {
+        padding: 10px 12px 12px;
+      }
+
+      .wm {
+        max-width: 94%;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .mast-eyebrow::before,
+      .collab-eyebrow::after,
+      .fb-tag::after,
+      .eyebrow-rule {
+        display: none;
+      }
+
+      .mast-eyebrow,
+      .collab-eyebrow,
+      .fb-tag,
+      .eyebrow-row {
+        gap: 8px;
+      }
+
+      .guide-rule {
+        margin: 18px 0;
+      }
+
+      .contents-row {
+        font-size: 12.5px;
+      }
+
+      .c-num {
+        font-size: 9px;
+      }
+
+      .tick-item {
+        padding: 0 14px;
+        letter-spacing: .12em;
+      }
+
+      .pipeline-left {
+        width: 28px;
+      }
+
+      .pipeline-label {
+        padding-left: 12px;
+        font-size: 9px;
+        letter-spacing: .12em;
+      }
+
+      .fb-main {
+        gap: 20px;
+      }
+
+      #ws {
+        width: calc(100vw - 16px);
+        right: 8px;
+        bottom: 72px;
+      }
+
+      #launcher {
+        right: 10px;
+        bottom: 14px;
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .cap:hover,
+      .pipe-quote:hover,
+      .nav-links a:hover,
+      .contents-row:hover,
+      .ws-send:hover,
+      #launcher:hover {
+        background: inherit;
+        color: inherit;
+        border-color: inherit;
+        transform: none;
+        box-shadow: inherit;
+      }
+    }
+
+    @supports (padding: max(0px)) {
+      @media (max-width: 560px) {
+        nav,
+        .mast-inner,
+        .inner,
+        .collab-inner,
+        .fb-section,
+        footer,
+        .pipeline-conn {
+          padding-left: max(16px, env(safe-area-inset-left));
+          padding-right: max(16px, env(safe-area-inset-right));
+        }
+
+        #launcher {
+          right: max(10px, env(safe-area-inset-right));
+          bottom: max(14px, env(safe-area-inset-bottom));
+        }
+
+        #ws {
+          right: max(8px, env(safe-area-inset-right));
+          bottom: calc(max(72px, env(safe-area-inset-bottom) + 58px));
+        }
+      }
+    }
   </style>
 </head>
 <body>
