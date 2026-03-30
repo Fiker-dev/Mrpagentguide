@@ -1665,7 +1665,7 @@
       }
     }
 
-    function addMsg(text, role) {
+    function addMsg(text, role, saveToHistory = true) {
       if (!msgs) return;
 
       const wrapper = document.createElement('div');
@@ -1677,8 +1677,10 @@
 
       msgs.appendChild(wrapper);
 
-      if (role === 'user') pushHistory('user', text);
-      if (role === 'bot' || role === 'assistant') pushHistory('assistant', text);
+      if (saveToHistory) {
+        if (role === 'user') pushHistory('user', text);
+        if (role === 'bot' || role === 'assistant') pushHistory('assistant', text);
+      }
 
       const body = document.querySelector('.ws-body');
       if (body) body.scrollTop = body.scrollHeight;
@@ -1799,7 +1801,7 @@
       const text = input.value.trim();
       if (!text) return;
 
-      addMsg(text, 'user');
+      addMsg(text, 'user', false);
       input.value = '';
       input.style.height = 'auto';
 
@@ -1810,6 +1812,8 @@
         const data = await postChat(text);
 
         removeTyping();
+
+        pushHistory('user', text);
 
         if (data?.reply) {
           const cleanedReply = normalizeBotReply(data.reply);
